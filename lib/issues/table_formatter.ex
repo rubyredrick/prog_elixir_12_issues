@@ -1,5 +1,4 @@
 defmodule Issues.TableFormatter do
-  
   import Enum, only: [ each: 2, map: 2, map_join: 3, max: 1]
   
   @doc """
@@ -27,11 +26,12 @@ defmodule Issues.TableFormatter do
   list of columns to extract
 
   ## Example
-  iex> list = [ [ {"a", "1"}, {"b", "2"}, {"c", "3"}],
-  ...>          [ {"a", "4"}, {"b", "5"}, {"c", "6"}] ]
 
-  iex> Issues.TableFormatter.split_into_columns(list, [ "a", "b", "c" ])
-  [ ["1", "4"], ["2", "5"], ["3", "6"] ]
+      iex> list = [ [ {"a", "1"}, {"b", "2"}, {"c", "3"}],
+      ...>          [ {"a", "4"}, {"b", "5"}, {"c", "6"}] ]
+      iex> Issues.TableFormatter.split_into_columns(list, [ "a", "b", "c" ])
+      [ ["1", "4"], ["2", "5"], ["3", "6"] ]
+
   """
   def split_into_columns(rows, headers) do
     lc header inlist headers do
@@ -55,8 +55,9 @@ defmodule Issues.TableFormatter do
   for a column, return a list containing the maximum width of each column
 
   ## Example
-     iex> data = [["cat","wombat", "elk"], ["mongoose","ant", "gnu"]]
-     [ 6, 8]
+
+       iex> data = [["cat","wombat", "elk"], ["mongoose","ant", "gnu"]]
+       [ 6, 8]
   """
   def widths_of(columns) do
     lc column inlist columns do
@@ -104,4 +105,11 @@ defmodule Issues.TableFormatter do
   def puts_one_line_in_columns(fields, format) do
     :io.format(format, fields)
   end
+end
+
+ExUnit.start
+
+defmodule Sample do
+  use ExUnit.Case
+  doctest Issues.TableFormatter
 end

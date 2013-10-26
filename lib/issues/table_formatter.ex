@@ -42,9 +42,9 @@ defmodule Issues.TableFormatter do
   @doc """
   Return a binary (string) version of our parameter
   ## Examples
-    iex> Issues.printable("a")
+    iex> Issues.TableFormatter.printable("a")
     "a"
-    iex> Issues.printable(99)
+    iex> Issues.TableFormatter.printable(99)
     "99"
   """
   def printable(str) when is_binary(str), do: str
@@ -57,6 +57,7 @@ defmodule Issues.TableFormatter do
   ## Example
 
        iex> data = [["cat","wombat", "elk"], ["mongoose","ant", "gnu"]]
+       iex> Issues.TableFormatter.widths_of(data)
        [ 6, 8]
   """
   def widths_of(columns) do
@@ -85,7 +86,7 @@ defmodule Issues.TableFormatter do
   ## Example
      iex> widths = [5,6,9]
      iex> Issues.TableFormatter.separator(widths)
-     "-----+------+---------"
+     "------+--------+----------"
   """
   def separator(column_widths) do
     map_join(column_widths, "-+-", fn width -> List.duplicate("-", width) end)
